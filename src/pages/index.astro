@@ -1,17 +1,49 @@
 ---
+import Layout from "../layouts/Layout.astro";
 
+const posts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
+
+posts.sort(
+  (a, b) =>
+    new Date(b.frontmatter.date).getTime() -
+    new Date(a.frontmatter.date).getTime()
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Jonas Widmark">
+  <header>
+    <h1>Jonas Widmark</h1>
+    <p class="intro">
+      Notes.
+    </p>
+  </header>
+
+  <ul class="posts">
+    {posts.map((post) => (
+      <li>
+        <a href={post.url}>{post.frontmatter.title}</a>
+      </li>
+    ))}
+  </ul>
+
+  <style>
+    h1 {
+      font-size: 1.9rem;
+      margin-bottom: 0.4rem;
+    }
+    .intro {
+      color: var(--muted);
+      margin-top: 0;
+      margin-bottom: 3rem;
+    }
+    .posts {
+      list-style: none;
+      padding: 0;
+    }
+    .posts li {
+      margin-bottom: 0.8rem;
+    }
+  </style>
+</Layout>
