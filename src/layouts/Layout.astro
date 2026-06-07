@@ -1,0 +1,49 @@
+---
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ?? "Jonas Widmark"}</title>
+  </head>
+  <body>
+    <main>
+      <slot />
+    </main>
+    <style>
+      :root {
+        --ink: #1a1a1a;
+        --bg: #fdfdfc;
+        --muted: #666;
+        --link: #1a1a1a;
+        --measure: 38rem;
+      }
+      html {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: var(--measure);
+        margin: 0 auto;
+        padding: 4rem 1.25rem 6rem;
+      }
+      a {
+        color: var(--link);
+        text-underline-offset: 2px;
+      }
+      h1, h2, h3 {
+        line-height: 1.25;
+        font-weight: 600;
+      }
+    </style>
+  </body>
+</html>
